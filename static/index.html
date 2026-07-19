@@ -1,1 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#f5f0eb">
+    <title>AI 小说写作助手</title>
+    <link rel="stylesheet" href="/static/css/style.css?v=20260719y">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- Mobile Menu Button (仅登录后显示，动画汉堡图标) -->
+    <button class="menu-btn hamburger" id="menuBtn" onclick="toggleSidebar()" title="菜单" aria-label="菜单">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+    </button>
 
+    <!-- Sidebar Overlay (mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar(false)"></div>
+
+    <!-- Sidebar (仅登录后显示) -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1><i data-lucide="book-open-text" class="nav-icon"></i> AI 写小说</h1>
+            <button class="btn btn-sm" onclick="doLogout()" title="退出登录" style="padding:4px 10px"><i data-lucide="log-out" class="btn-icon"></i> 退出</button>
+        </div>
+        <nav class="sidebar-nav" id="sidebarNav">
+            <div class="nav-item active" data-page="novels" onclick="navigate('novels')">
+                <i data-lucide="library" class="nav-icon"></i> 我的小说
+            </div>
+            <div class="nav-item" data-page="settings" onclick="navigate('settings')">
+                <i data-lucide="settings" class="nav-icon"></i> 功能设置
+            </div>
+            <div class="nav-item" data-page="backup" onclick="navigate('backup')">
+                <i data-lucide="database-backup" class="nav-icon"></i> 备份迁移
+            </div>
+        </nav>
+        <!-- 进行中的创作任务提示区（动态显示） -->
+        <div id="activeTasksPanel" style="display:none;padding:8px 12px;border-top:1px solid var(--border);margin-top:8px"></div>
+        <div class="sidebar-footer">
+            <div id="versionInfo" style="font-size:0.7rem;color:var(--text-secondary);text-align:center;padding:2px 0 0;cursor:pointer;user-select:none" onclick="event.stopPropagation(); showVersionInfo()" title="点击查看版本详情">
+                <span id="versionText">版本加载中...</span>
+            </div>
+            <div style="font-size:0.65rem;color:var(--text-tertiary,#888);text-align:center;padding:2px 0 4px;user-select:none">
+                by <a href="https://github.com/qiyueling2716" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline" onclick="event.stopPropagation()">qiyueling2716</a>
+            </div>
+            <button class="btn btn-danger btn-restart" onclick="event.stopPropagation(); confirmRestart()" title="重启应用以应用配置变更">
+                <i data-lucide="refresh-cw" class="btn-icon"></i> 重启应用
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Area -->
+    <main class="main-area" id="mainArea">
+        <!-- Pages are rendered dynamically -->
+    </main>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="/static/js/app.js?v=20260720n"></script>
+</body>
+</html>
